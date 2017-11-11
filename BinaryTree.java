@@ -142,7 +142,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     }
 
 
-//    Начинаем с корня
+    //    Начинаем с корня
 //    Сравниваем элемент с toElement
 //    Если он (элемент) больше, то ничего не делаем и переходим к левому ребенку
 //    Если он меньше, то добавляем к ответу его и его левое поддерево и переходим к правому ребенку
@@ -191,7 +191,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     }
 
     //вспомогательный метод, для добавления всех потомков ячейки в отдельное дерево
-    private void addChildren (Node<T> start, BinaryTree<T> tree) {
+    private void addChildren(Node<T> start, BinaryTree<T> tree) {
         if (start.left != null) {
             tree.add((start.left).value);
             addChildren(start.left, tree);
@@ -203,7 +203,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
     }
 
 
-//    Алгоритм аналогичен алгоритму нахождения headSet, если сравниваемый элемент больше, чем fromElement,
+    //    Алгоритм аналогичен алгоритму нахождения headSet, если сравниваемый элемент больше, чем fromElement,
 //    то добавляем его правое поддерево и переходим к левому потомку, иначе, не добавляя переходим к правому
     @NotNull
     @Override
@@ -220,19 +220,27 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
                         //если сравниваемый элемент больше, чем fromElement, то мы добавляем этот элемент
                         // и его правое поддерево в результат и переходим к его левому потомку
                         subTree.add(tempVal);
-                        subTree.add((temp.right).value);
-                        addChildren(temp.right, subTree);
-                        temp = temp.left;
-                        tempVal = temp.value;
+                        if (temp.right != null) {
+                            subTree.add((temp.right).value);
+                            addChildren(temp.right, subTree);
+                        }
+                        if (temp.left != null) {
+                            temp = temp.left;
+                            tempVal = temp.value;
+                        } else break;
                     } else if (tempVal.compareTo(fromElement) < 0) {
                         //если сравниваемый элемент меньше, чем fromElement, то мы переходим к его правому потомку,
                         // ничего не добавляя в результат
-                        temp = temp.right;
-                        tempVal = temp.value;
+                        if (temp.right != null) {
+                            temp = temp.right;
+                            tempVal = temp.value;
+                        } else break;
                     } else if (tempVal.compareTo(fromElement) == 0) {
                         //если мы нашли fromElement, то добавляем его правое поддерево и выходим из цикла
-                        subTree.add((temp.right).value);
-                        addChildren(temp.right, subTree);
+                        if (temp.right != null) {
+                            subTree.add((temp.right).value);
+                            addChildren(temp.right, subTree);
+                        }
                         break;
                     }
                 }
