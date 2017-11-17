@@ -50,10 +50,11 @@ class BinaryTreeTest {
         assertTrue(hSet.contains(3))
         assertTrue(hSet.contains(4))
 
-        assertEquals(3, tSet.size)
+        assertEquals(4, tSet.size)
         assertTrue(tSet.contains(10))
         assertTrue(tSet.contains(11))
         assertTrue(tSet.contains(12))
+        assertTrue(tSet.contains(5))
     }
 
 
