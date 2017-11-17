@@ -137,8 +137,22 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
 
     @NotNull
     @Override
-    public SortedSet<T> subSet(T fromElement, T toElement) {
-        throw new UnsupportedOperationException();
+    public SortedSet<T> subSet(T fromElement, T toElement) { throw new UnsupportedOperationException();
+//        if (toElement == null || fromElement == null) throw new NullPointerException();
+//        else {
+//
+//            Node<T> temp = this.root;
+//            T tempVal = temp.value;
+//            if (tempVal == null) throw new NoSuchElementException();
+//            else {
+//                if (tempVal.compareTo(fromElement) < 0) temp = temp.right;
+//                else if (tempVal.compareTo(toElement) > 0) temp = temp.left;
+//                if (tempVal.compareTo(fromElement) > 0 && tempVal.compareTo(toElement) < 0) {
+//
+//                }
+//            }
+//        }
+//        return this;
     }
 
 
@@ -236,6 +250,7 @@ public class BinaryTree<T extends Comparable<T>> extends AbstractSet<T> implemen
                             tempVal = temp.value;
                         } else break;
                     } else if (tempVal.compareTo(fromElement) == 0) {
+                        subTree.add(tempVal);
                         //если мы нашли fromElement, то добавляем его правое поддерево и выходим из цикла
                         if (temp.right != null) {
                             subTree.add((temp.right).value);
